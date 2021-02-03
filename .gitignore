@@ -1,3 +1,6 @@
+*.svg
+*.gv
+
 # Prerequisites
 *.d
 
