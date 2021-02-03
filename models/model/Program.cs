@@ -14,6 +14,7 @@ namespace model
             /********* arguments **********/
             string dataDir = args[0];
             string coinTrue = args[1];
+            string inferenceMethod = args[2];
             /******************************/
 
             /********* model setup **********/
@@ -23,8 +24,21 @@ namespace model
             /********************************/
 
             /****** inference engine *******/
-            M.InferenceEngine engine = new M.InferenceEngine(new A.GibbsSampling());
-            engine.ShowFactorGraph = true;
+            M.InferenceEngine engine = new M.InferenceEngine(new A.ExpectationPropagation());
+            if (inferenceMethod == "EP")
+            {
+                engine = new M.InferenceEngine(new A.ExpectationPropagation());
+            }
+            else if (inferenceMethod == "VMP")
+            {
+                engine = new M.InferenceEngine(new A.VariationalMessagePassing());
+            }
+            else if (inferenceMethod == "Gibbs")
+            {
+                engine = new M.InferenceEngine(new A.GibbsSampling());
+            }
+
+            engine.ShowFactorGraph = false;
             /*******************************/
 
 
@@ -88,7 +102,7 @@ namespace model
             line = string.Format("posterior;bothHeads;{0}", postBothHeads.GetMean());
             results.AppendLine(line.Replace(',', '.'));
 
-            File.WriteAllText(dataDir + "results.csv", results.ToString());
+            File.WriteAllText(dataDir + "/results.csv", results.ToString());
             /*********************************/
 
         }
