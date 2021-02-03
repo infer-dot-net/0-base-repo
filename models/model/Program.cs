@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.ML.Probabilistic.Models;
+using M = Microsoft.ML.Probabilistic.Models;
 using D = Microsoft.ML.Probabilistic.Distributions;
 using A = Microsoft.ML.Probabilistic.Algorithms;
 using System.IO;
@@ -17,13 +17,13 @@ namespace model
             /******************************/
 
             /********* model setup **********/
-            Variable<bool> firstCoin = Variable.Bernoulli(0.5).Named("firstCoin");
-            Variable<bool> secondCoin = Variable.Bernoulli(0.5).Named("secondCoin");
-            Variable<bool> bothHeads = (firstCoin & secondCoin).Named("bothHeads");
+            M.Variable<bool> firstCoin = M.Variable.Bernoulli(0.5).Named("firstCoin");
+            M.Variable<bool> secondCoin = M.Variable.Bernoulli(0.5).Named("secondCoin");
+            M.Variable<bool> bothHeads = (firstCoin & secondCoin).Named("bothHeads");
             /********************************/
 
             /****** inference engine *******/
-            InferenceEngine engine = new InferenceEngine(new A.GibbsSampling());
+            M.InferenceEngine engine = new M.InferenceEngine(new A.GibbsSampling());
             engine.ShowFactorGraph = true;
             /*******************************/
 
