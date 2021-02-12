@@ -11,7 +11,7 @@ This repo is used as the base repo for projects that have models that are called
 If you've never heard of probabilistic programming before, here is the gist. If you want to see how a certain distribution will influence another using traditional programming techniques, you'd normally sample from that distribution and run a simulation for each of the values you've sampled with the hope that you've covered all the bases. In the image below, we'd like to estimate the output distribution, P(y), of some system, f(x), given the input distribution P(x). If you sample enough x's, and f(x) is well behaved, then the estimated P(y) isn't a bad estimate.
 
 <div align="center">
-    <img src="../0-base-repo/diagrams/1-var-sim.jpg" width="40%">
+    <img src="./diagrams/1-var-sim.jpg" width="40%">
 </div>
 
 But this approach becomes murky when there are multiple x's as the interaction between all of the input variables might not be so trivial and even when sampling a lot, there might still be some x's we don't see that might cause the output distribution to be vastly different from what we estimate. 
