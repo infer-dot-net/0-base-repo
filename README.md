@@ -1,8 +1,22 @@
 # 0: Base Repo
 
-If you are use to scripting languages like Python, setting up a compiled language project like C# on Linux, Windows or MacOS can be daunting to say the least. Further, getting the dotNet framework to work and then Microsoft's inferDotNot package on top of that creates more barriers to get going coding up the awesome probabilistic models that you can build with the inferDotNet package.
+Welcome to the infer-dot-net repo - a collection of repositories exploring how to use Microsoft's inferDotNet package written for C#'s .Net framework.
 
-This repo is used as the base repo for projects that have models that are called from python notebooks. You can fork this repo to have a boiler plate setup for a inferDotNet model.
+If you are familiar with scripting languages like Python, setting up a compiled language project like C# on Linux, Windows or macOS can be daunting, to say the least. Further, getting the dotNet framework to work and then Microsoft's inferDotNot package on top of that creates more barriers to get going coding up the awesome probabilistic models that you can build with the inferDotNet package.
+
+This repo is used as the base repo for projects that have models that are called from python notebooks. You can fork this repo to have a boilerplate setup for an inferDotNet model.
+
+## What is probabilistic programming?
+
+If you've never heard of probabilistic programming before, here is the gist. If you want to see how a certain distribution will influence another using traditional programming techniques, you'd normally sample from that distribution and run a simulation for each of the values you've sampled with the hope that you've covered all the bases. In the image below, we'd like to estimate the output distribution, P(y), of some system, f(x), given the input distribution P(x). If you sample enough x's, and f(x) is well behaved, then the estimated P(y) isn't a bad estimate.
+
+<div align="center">
+    <img src="../0-base-repo/diagrams/1-var-sim.jpg" width="40%">
+</div>
+
+But this approach becomes murky when there are multiple x's as the interaction between all of the input variables might not be so trivial and even when sampling a lot, there might still be some x's we don't see that might cause the output distribution to be vastly different from what we estimate. 
+
+Enter probabilistic programming. Instead of declaring variables and sampling their values from a distribution, we instead create random variables and we can define the interactions between them. Instead of sampling values from the distributions, the parameters of the distributions of the random variables get updated using message passing algorithms. This repo simulates a simple dice roll example using 3 of these, viz: Expectation Propagation, Variational Message Passing and Gibbs Sampling, the results of which can be seen below.
 
 ## Installing C# and inferDotNet
 
@@ -76,7 +90,7 @@ postBothHeads  : Bernoulli(0.5)
 
 ## More on the model
 
-The basic outline of a model we've created is a two coin flipping example. We've got 2 unbiased coins: `firstCoin` and `secondCoin` and we create another random variable `bothHeads` that is true when both `firstCoin` and `secondCoin` is true. We'd like to infer the posterior probability of `bothHead` given we observe one of the other coins, i.e.
+The basic outline of a model we've created is a two-coin flipping example. We've got 2 unbiased coins: `firstCoin` and `secondCoin` and we create another random variable `bothHeads` that is true when both `firstCoin` and `secondCoin` is true. We'd like to infer the posterior probability of `bothHead` given we observe one of the other coins, i.e.
 
 <div align='center'>
     <img src="https://render.githubusercontent.com/render/math?math=p(bothHead|firstCoin = heads)">
